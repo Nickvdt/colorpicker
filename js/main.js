@@ -1,19 +1,39 @@
-const colors = document.getElementsByClassName("colors__color");
-let secondColor = false;
-for(let i = 0; i < colors.length; i++){
-    // nummer inclusief 1 - 360 inclusief
-    // percentage inclusief 11 - 79 => saturatie
-    // percentage inclusief 11 - 100 => licht
-    //x = Max.random() * (max - min) + min;
-    let randomHue = Math.floor(Math.random() * (360 - 1) + 1);
-    let randomSaturation = Math.floor(Math.random() * (79 - 11) + 11) + "%";
-    let randomLightness = Math.floor(Math.random() * (100 - 11) + 11) + "%";
-    
-    colors[i].children[0].style.background = `hsl(${randomHue} ${randomSaturation} ${randomLightness})`;
-    // onlick 
-    colors[i].onclick = function(){
-        colors[i].children[0].classList.add("colors__circle--selected");
-        navigator.clipboard.writeText(colors[i].children[0].style.background);
-        document.title = colors[i].children[0].style.background;
+class ColorCard{
+    id
+    color;
+    addToList;
+    htmlElement;
+    circle;
+    text;
+    constructor(newId, newColor, addToList){
+        /* setting properties */
+        this.id = newId;
+        this.color = newColor;
+        this.addToList = addToList;
+        /* Make listitem to render */
+        this.htmlElement = document.createElement("li");
+        this.htmlElement.classList = "colors__color";
+        this.circle = document.createElement("figure");
+        this.circle.classList = "colors__circle";
+        this.circle.style.background = this.color;
+        this.htmlElement.appendChild(this.circle);
+        this.text = document.createElement("p");
+        this.text.innerText = "Copied";
+        this.text.classList = "colors__text";
+        this.htmlElement.onclick = this.onHTMLElementClicked;
+        /* finally render */
+        this.render();
     }
+
+    onHTMLElementClicked = () =>{
+        this.circle.classList.add("colors__circle--selected");
+    }
+    render(){
+        this.htmlElement.appendChild(this.text);
+        this.htmlElement.appendChild(this.circle);
+        this.addToList.appendChild(this.htmlElement);
+    }
+
 }
+
+const test = new ColorCard(101, "hsl(284,52%,36%)", document.getElementById("js--colors") );
