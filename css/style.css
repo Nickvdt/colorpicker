@@ -387,6 +387,7 @@ body {
   animation-name: popup;
   animation-duration: 0.6s;
   display: none;
+  z-index: 2;
 }
 .colors__circle--selected + .colors__text {
   display: block;

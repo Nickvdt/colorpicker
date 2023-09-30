@@ -1,0 +1,2 @@
+# Color Picker
+Deze website biedt een handige tool om kleuren te kiezen voor je projecten. Met een eenvoudige klik op een kleur kun je de bijbehorende hexcode kopiëren. De site volledige gerenderd via Javascript OOP.git s
